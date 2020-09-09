@@ -1,6 +1,6 @@
 # Random permutation validator  
   
-###  `user` Bash executable is in `output` folder  
+###  `user` _(Bash?)_ linux executable is in `dist` folder  
 run executable in linux = `exec appriori file param param param`  
 example: exec appriori fanituotteet.csv "Caps" "Mugs" 100  
   

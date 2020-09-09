@@ -42,8 +42,8 @@ def main():
             display_progress(perm, total_perm)
             matrix = shuffle_matrix(matrix)
             transactions += calc_confidence(matrix, given, expected)
-            l.write(matrix)
             perm += 1
+        print("")
 
         # output
         t.write("Total transactions: " + str(len(matrix) * perm) + "\n")
@@ -55,6 +55,7 @@ def main():
         s.close()
         t.close()
         l.close()
+        print("done")
         
 #___CALCULATION___
 def calc_confidence(data, given, expected):
