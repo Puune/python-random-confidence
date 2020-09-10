@@ -10,18 +10,17 @@ Necessary params:
   
 Optional params:  
 - `-d or --debug` - `enables debug features`
+end with `&` to not close terminal
   
-end wiht `&` to not close terminal
-  
-example: exec appriori -i fanituotteet.csv -g "Caps,Mugs" -e "TShirts" -p 100  
+example: **exec ./appriori -i fanituotteet.csv -g "Caps,Mugs" -e "TShirts" -p 100** 
   
 read output on `target.csv`    
   
 ### `user` Expected file input  
-Id;Caps;Mugs;TShirts;  
-1;1;1;1;  
-2;0;0;0;  
-3;1;1;1;  
+Id,Caps,Mugs,TShirts,  
+1,1,1,1  
+2,0,0,0  
+3,1,1,1  
 where `id` is expected (and removed from calc)  
 and matrix dimensions are dynamic (unbound) 
 
