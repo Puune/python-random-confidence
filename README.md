@@ -1,4 +1,12 @@
 # Random permutation validator  
+
+## Introduction  
+This project is a tool, created for validating appriori algorithm's inferred results. this program works by
+randomising other-than index columns, and calculating confidence by:  
+**given** = "when transaction has A.. ", **expected** = ".. transaction also has B,"  
+**confidence = t / a**, where t is **given** & **expected** variables fulfilled and a is **given** variables fulfilled  
+  
+## Instructions 
   
 ###  `user` _(Bash?)_ linux executable is in `dist` folder  
 run executable in linux = `exec appriori [...(opt param)]`  
@@ -9,7 +17,7 @@ Necessary params:
 - `-p or --permutations` - `int permutations`  
   
 Optional params:  
-- `-d or --debug` - `enables debug features`
+- `-d or --debug` - `enables debug features`  
 end with `&` to not close terminal
   
 example: **exec ./appriori -i fanituotteet.csv -g "Caps,Mugs" -e "TShirts" -p 100** 
