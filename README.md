@@ -3,18 +3,18 @@
 ###  `user` _(Bash?)_ linux executable is in `dist` folder  
 run executable in linux = `exec appriori [...(opt param)]`  
 Necessary params:  
-- `-i or --input` `filename.type`  
-- `-g or --given` `field names`  
-- `-e or --expected` `field names`  
-- `-p or --permutations` `int permutations`  
+- `-i or --input` - `filename.type`  
+- `-g or --given` - `field names`  
+- `-e or --expected` - `field names`  
+- `-p or --permutations` - `int permutations`  
   
 Optional params:  
-- `-d or --debug` `enables debug features`
+- `-d or --debug` - `enables debug features`
   
-example: exec appriori -i fanituotteet.csv -g "Caps,Mugs" -e "Mugs" -p 100  
+example: exec appriori -i fanituotteet.csv -g "Caps,Mugs" -e "TShirts" -p 100  
   
 ### `user` Expected file input  
-id;asd;basd;ad;  
+Id;Caps;Mugs;TShirts;  
 1;1;1;1;  
 2;0;0;0;  
 3;1;1;1;  
@@ -27,7 +27,7 @@ and matrix dimensions are dynamic (unbound)
 - stop virtualenv=deactivate  
 
 ### `dev` Script usage in linux wiht python3 installed  
-python3 {String:filename.type} {String:left group} {Strint:right group} {integer: permutations}  
+python3 appriori.py [...(opt param)]  
 syntax of left/right group = 'classA,classB'  
 read output on `target.csv`  
   
