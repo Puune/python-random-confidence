@@ -1,16 +1,28 @@
 #!/usr/bin/env python3
 __author__ = 'Panu Lindqvist'
 
-import sys, numpy, random, math, copy as cp
+import sys, numpy as np, random, math, copy as cp
+import profiler
 
 #___MAIN___
-def main():
-    print ('Running appriori randomizer python script')
-    print ('With params: ' + str(sys.argv))
-    if len(sys.argv) < 5:
-        raise RuntimeError('Bad input, refer to REAMDE.md')
+def entrypoint():
+    args = arg_extract(sys.argv)
 
-    s = open(sys.argv[1], "r")  # open source
+    @profiler.profile()
+    def profiled_main():
+        main(args)
+
+    if args['deb']:
+        profiled_main()
+    else:
+        main(args)
+
+def main(args):
+    print ('Running appriori randomizer python script')
+    print ('With params', args)
+
+
+    s = open(args['in'], "r")  # open source
     t = open("target.csv","w+") # create target
     l = open("log.csv", "w") # create log
     try:
@@ -27,16 +39,16 @@ def main():
         matrix = lines_to_matrix(lines)
     
         # validate input params
-        given = validate_candidates(strip_split(sys.argv[2]), headers)
-        expected = validate_candidates(strip_split(sys.argv[3]), headers)
-        total_perm = int(sys.argv[4])
+        given = validate_candidates(strip_split(args["giv"]), headers)
+        expected = validate_candidates(strip_split(args["exp"]), headers)
+        total_perm = int(args["perm"])
         # turn names into indexes
         given = param_to_index(given, headers)
         expected = param_to_index(expected, headers)
 
         ## permutations
         # transactions = [fulfilled initial reqs, fulfilled all reqs]
-        transactions = numpy.array([0, 0])
+        transactions = np.array([0, 0])
         perm = 0
         while(perm<total_perm):
             display_progress(perm, total_perm)
@@ -55,11 +67,36 @@ def main():
         s.close()
         t.close()
         l.close()
-        print("done")
-        
+        print("done")    
+
+def arg_extract(argv):
+    argv.pop(0)
+    args = { 'none': None }
+    iterator = iter(argv)
+    for opt in iterator:
+        if opt in ('-i', '--input'):
+            args['in'] = next(iterator)
+        elif opt in ('-g', '--given'):
+            args['giv'] = next(iterator)
+        elif opt in ('-e', '--expected'):
+            args['exp'] = next(iterator)
+        elif opt in ('-p', '--permutations'):
+            args['perm'] = int(next(iterator))
+        elif opt in ('-d', '--debug') and next(iterator) != 'false':
+            args['deb'] = True
+        else:
+            print("unknow option:", opt)
+            next(iterator)
+
+    if args['in'] == None:
+        raise RuntimeError('No input defined')
+    elif None in (args['giv'], args['exp']):
+        print("Running without given/expected params")
+    return args
+
 #___CALCULATION___
 def calc_confidence(data, given, expected):
-    transactions = numpy.array([0, 0])
+    transactions = [0,0]
     for arr in data:
         # case has initial requirements
         match_given = recursive_validation(arr, given[0], cp.copy(given))
@@ -91,7 +128,7 @@ def calc_standard_confidence(confidences, total):
 #___VISUAL__
 def display_progress(current, total):
     out = "Progress: ["
-    i = round((current / total) * 25)
+    i = np.round((current / total) * 25)
     k = 0
     while(k<25):
         if(k<i):
@@ -138,11 +175,11 @@ def lines_to_matrix(lines):
     return matrix
 
 def shuffle_matrix(matrix):
-    matrix = numpy.transpose(matrix) # Transpose matrix so columns are handled as rows
+    matrix = np.transpose(matrix) # Transpose matrix so columns are handled as rows
     for index, arr in enumerate(matrix):
         if index != 0:
-            numpy.random.shuffle(matrix[index])
-    return numpy.transpose(matrix)
+            np.random.shuffle(matrix[index])
+    return np.transpose(matrix)
 
 def arr_to_string(arr):
     out = ""
@@ -157,4 +194,4 @@ def matrix_to_string(matrix):
     return new_lines
 
 if __name__ == "__main__":
-    main()
+    entrypoint()

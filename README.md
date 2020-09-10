@@ -1,8 +1,17 @@
 # Random permutation validator  
   
 ###  `user` _(Bash?)_ linux executable is in `dist` folder  
-run executable in linux = `exec appriori file param param param`  
-example: exec appriori fanituotteet.csv "Caps" "Mugs" 100  
+run executable in linux = `exec appriori [...(opt param)]`  
+Necessary params:  
+- `-i or --input` `filename.type`  
+- `-g or --given` `field names`  
+- `-e or --expected` `field names`  
+- `-p or --permutations` `int permutations`  
+  
+Optional params:  
+- `-d or --debug` `enables debug features`
+  
+example: exec appriori -i fanituotteet.csv -g "Caps,Mugs" -e "Mugs" -p 100  
   
 ### `user` Expected file input  
 id;asd;basd;ad;  

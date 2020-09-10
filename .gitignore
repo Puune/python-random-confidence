@@ -1,4 +1,5 @@
 *.spec
+*.prof
 *.csv
 *.txt
 lib/
