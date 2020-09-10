@@ -6,16 +6,23 @@ import profiler
 
 #___MAIN___
 def entrypoint():
-    args = arg_extract(sys.argv)
+    try:
+        args = arg_extract(sys.argv)
 
-    @profiler.profile()
-    def profiled_main():
-        main(args)
+        @profiler.profile()
+        def profiled_main():
+            main(args)
 
-    if args['deb']:
-        profiled_main()
-    else:
-        main(args)
+        if 'deb' in args:
+            profiled_main()
+        else:
+            main(args)
+
+    except Exception as e:
+        print(e.args)
+    
+    finally:
+        input("press enter to exit")
 
 def main(args):
     print ('Running appriori randomizer python script')
@@ -23,11 +30,11 @@ def main(args):
 
 
     s = open(args['in'], "r")  # open source
-    t = open("target.csv","w+") # create target
-    l = open("log.csv", "w") # create log
+    t = open("target.csv","w+") # create target    
+
     try:
         if s.mode != 'r':
-            raise IOError('Bad file')
+            raise Exception('Bad file')
 
         ## preprocess
         lines = s.readlines()
@@ -66,7 +73,6 @@ def main(args):
     finally:
         s.close()
         t.close()
-        l.close()
         print("done")    
 
 def arg_extract(argv):
@@ -88,8 +94,8 @@ def arg_extract(argv):
             print("unknow option:", opt)
             next(iterator)
 
-    if args['in'] == None:
-        raise RuntimeError('No input defined')
+    if 'in' not in args:
+        raise Exception('No input defined')
     elif None in (args['giv'], args['exp']):
         print("Running without given/expected params")
     return args

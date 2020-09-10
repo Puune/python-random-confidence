@@ -11,7 +11,11 @@ Necessary params:
 Optional params:  
 - `-d or --debug` - `enables debug features`
   
+end wiht `&` to not close terminal
+  
 example: exec appriori -i fanituotteet.csv -g "Caps,Mugs" -e "TShirts" -p 100  
+  
+read output on `target.csv`    
   
 ### `user` Expected file input  
 Id;Caps;Mugs;TShirts;  
@@ -27,7 +31,4 @@ and matrix dimensions are dynamic (unbound)
 - stop virtualenv=deactivate  
 
 ### `dev` Script usage in linux wiht python3 installed  
-python3 appriori.py [...(opt param)]  
-syntax of left/right group = 'classA,classB'  
-read output on `target.csv`  
-  
+python3 appriori.py [...(opt param)]    
