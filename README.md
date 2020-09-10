@@ -1,7 +1,7 @@
 # Random permutation validator  
 
 ## Introduction  
-This project is a tool, created for validating appriori algorithm's inferred results. this program works by
+This project is a tool, created for validating appriori algorithm's inferred results. This program works by
 randomising other-than index columns, and calculating confidence by:  
 **given** = "when transaction has A.. ", **expected** = ".. transaction also has B,"  
 **confidence = t / a**, where t is **given** & **expected** variables fulfilled and a is **given** variables fulfilled  
