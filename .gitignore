@@ -3,5 +3,6 @@
 *.csv
 *.txt
 lib/
+bin/
 build/
 __pycache__/
