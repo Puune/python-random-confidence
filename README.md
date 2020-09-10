@@ -10,10 +10,9 @@ Necessary params:
   
 Optional params:  
 - `-d or --debug` - `enables debug features`
+end with `&` to not close terminal
   
-end wiht `&` to not close terminal
-  
-example: exec appriori -i fanituotteet.csv -g "Caps,Mugs" -e "TShirts" -p 100  
+example: **exec appriori -i fanituotteet.csv -g "Caps,Mugs" -e "TShirts" -p 100** 
   
 read output on `target.csv`    
   
