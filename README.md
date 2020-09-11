@@ -11,7 +11,7 @@ randomising other-than index columns, and calculating confidence by:
 ###  `user` _(Bash?)_ linux executable is in `dist` folder  
 run executable in linux = `exec appriori [...(opt param)]`  
 Necessary params:  
-- `-i or --input` - `filename.type`  
+- `-i or --input` - `path-to-file/filename.type`  
 - `-g or --given` - `field names`  
 - `-e or --expected` - `field names`  
 - `-p or --permutations` - `int permutations`  
